@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Google Play Points</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
         .gradient-bg {
             background: linear-gradient(135deg, #4285F4 0%, #34A853 50%, #FBBC05 100%);
@@ -30,335 +31,471 @@
     </style>
 </head>
 <body class="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-    <div id="app" class="w-full max-w-md">
-        <!-- Main Content (hidden initially) -->
-        <div id="main-content" class="hidden">
-            <div class="bg-white rounded-xl p-8 card-shadow">
-                <div class="flex justify-center mb-6">
-                    <div class="gradient-bg rounded-full p-3">
-                        <i class="fas fa-crown text-white text-3xl"></i>
-                    </div>
+<div id="app" class="w-full max-w-md">
+
+    <!-- Main Content -->
+    <div id="main-content" class="hidden">
+        <div class="bg-white rounded-xl p-8 card-shadow">
+            <div class="flex justify-center mb-6">
+                <div class="gradient-bg rounded-full p-3">
+                    <i class="fas fa-crown text-white text-3xl"></i>
                 </div>
-                
-                <h1 class="text-2xl font-bold text-center text-gray-800 mb-2">Google Play Points</h1>
-                <p class="text-gray-600 text-center mb-6">Earn points on every purchase and redeem them for rewards</p>
-                
-                <div id="login-section">
-                    <div class="mb-4">
-                        <label for="email" class="block text-gray-700 text-sm font-medium mb-1">Email</label>
-                        <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg input-focus focus:outline-none focus:border-blue-500 transition" placeholder="your@email.com">
-                    </div>
-                    <div class="mb-6">
-                        <label for="password" class="block text-gray-700 text-sm font-medium mb-1">Password</label>
-                        <input type="password" id="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg input-focus focus:outline-none focus:border-blue-500 transition" placeholder="••••••••">
-                    </div>
-                    <button id="login-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300 mb-4">
-                        Sign In
-                    </button>
-                    <div class="text-center">
-                        <button id="show-register" class="text-blue-600 hover:text-blue-800 text-sm font-medium transition">
-                            Create account
-                        </button>
-                    </div>
+            </div>
+
+            <h1 class="text-2xl font-bold text-center text-gray-800 mb-2">Google Play Points</h1>
+            <p class="text-gray-600 text-center mb-6">Earn points on every purchase and redeem them for rewards</p>
+
+            <div id="login-section">
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 text-sm font-medium mb-1">Email</label>
+                    <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg input-focus focus:outline-none focus:border-blue-500 transition" placeholder="your@email.com" />
                 </div>
-                
-                <div id="register-section" class="hidden">
-                    <div class="mb-4">
-                        <label for="reg-name" class="block text-gray-700 text-sm font-medium mb-1">Full Name</label>
-                        <input type="text" id="reg-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg input-focus focus:outline-none focus:border-blue-500 transition" placeholder="John Doe">
-                    </div>
-                    <div class="mb-4">
-                        <label for="reg-email" class="block text-gray-700 text-sm font-medium mb-1">Email</label>
-                        <input type="email" id="reg-email" class="w-full px-4 py-2 border border-gray-300 rounded-lg input-focus focus:outline-none focus:border-blue-500 transition" placeholder="your@email.com">
-                    </div>
-                    <div class="mb-4">
-                        <label for="reg-password" class="block text-gray-700 text-sm font-medium mb-1">Password</label>
-                        <input type="password" id="reg-password" class="w-full px-4 py-2 border border-gray-300 rounded-lg input-focus focus:outline-none focus:border-blue-500 transition" placeholder="••••••••">
-                    </div>
-                    <div class="mb-6">
-                        <label for="reg-confirm" class="block text-gray-700 text-sm font-medium mb-1">Confirm Password</label>
-                        <input type="password" id="reg-confirm" class="w-full px-4 py-2 border border-gray-300 rounded-lg input-focus focus:outline-none focus:border-blue-500 transition" placeholder="••••••••">
-                    </div>
-                    <button id="register-btn" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300 mb-4">
-                        Register
+                <div class="mb-6">
+                    <label for="password" class="block text-gray-700 text-sm font-medium mb-1">Password</label>
+                    <input type="password" id="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg input-focus focus:outline-none focus:border-blue-500 transition" placeholder="••••••••" />
+                </div>
+                <button id="login-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300 mb-4">
+                    Sign In
+                </button>
+                <div class="text-center">
+                    <button id="show-register" class="text-blue-600 hover:text-blue-800 text-sm font-medium transition">
+                        Create account
                     </button>
-                    <div class="text-center">
-                        <button id="show-login" class="text-blue-600 hover:text-blue-800 text-sm font-medium transition">
-                            Already have an account? Sign in
+                </div>
+            </div>
+
+            <div id="register-section" class="hidden">
+                <div class="mb-4">
+                    <label for="reg-name" class="block text-gray-700 text-sm font-medium mb-1">Full Name</label>
+                    <input type="text" id="reg-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg input-focus focus:outline-none focus:border-blue-500 transition" placeholder="John Doe" />
+                </div>
+                <div class="mb-4">
+                    <label for="reg-email" class="block text-gray-700 text-sm font-medium mb-1">Email</label>
+                    <input type="email" id="reg-email" class="w-full px-4 py-2 border border-gray-300 rounded-lg input-focus focus:outline-none focus:border-blue-500 transition" placeholder="your@email.com" />
+                </div>
+                <div class="mb-4">
+                    <label for="reg-password" class="block text-gray-700 text-sm font-medium mb-1">Password</label>
+                    <input type="password" id="reg-password" class="w-full px-4 py-2 border border-gray-300 rounded-lg input-focus focus:outline-none focus:border-blue-500 transition" placeholder="••••••••" />
+                </div>
+                <div class="mb-6">
+                    <label for="reg-confirm" class="block text-gray-700 text-sm font-medium mb-1">Confirm Password</label>
+                    <input type="password" id="reg-confirm" class="w-full px-4 py-2 border border-gray-300 rounded-lg input-focus focus:outline-none focus:border-blue-500 transition" placeholder="••••••••" />
+                </div>
+                <button id="register-btn" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300 mb-4">
+                    Register
+                </button>
+                <div class="text-center">
+                    <button id="show-login" class="text-blue-600 hover:text-blue-800 text-sm font-medium transition">
+                        Already have an account? Sign in
+                    </button>
+                </div>
+
+                <!-- Developer Access -->
+                <div class="mt-8">
+                    <button id="dev-toggle" class="text-xs text-gray-500 hover:text-gray-700" type="button">
+                        <i class="fas fa-lock mr-1"></i> Developer Access
+                    </button>
+                    <div id="dev-box" class="developer-box bg-gray-50 rounded-lg p-3 mt-2">
+                        <div class="mb-2">
+                            <input type="password" id="dev-code" class="w-full px-3 py-1 text-xs border border-gray-300 rounded" placeholder="Enter developer code" autocomplete="off" />
+                        </div>
+                        <button id="dev-submit" class="text-xs bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded" type="button">
+                            Submit
                         </button>
-                    </div>
-                    
-                    <!-- Developer Access -->
-                    <div class="mt-8">
-                        <button id="dev-toggle" class="text-xs text-gray-500 hover:text-gray-700">
-                            <i class="fas fa-lock mr-1"></i> Developer Access
-                        </button>
-                        <div id="dev-box" class="developer-box bg-gray-50 rounded-lg p-3 mt-2">
-                            <div class="mb-2">
-                                <input type="password" id="dev-code" class="w-full px-3 py-1 text-xs border border-gray-300 rounded" placeholder="Enter developer code">
-                            </div>
-                            <button id="dev-submit" class="text-xs bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded">
-                                Submit
-                            </button>
-                            <div id="dev-content" class="mt-3 hidden">
-                                <h4 class="font-medium text-sm mb-2">Registered Users:</h4>
-                                <div id="user-list" class="text-xs space-y-1 max-h-60 overflow-y-auto">
-                                    <!-- Users will appear here -->
-                                </div>
+                        <div id="dev-content" class="mt-3 hidden" tabindex="0" aria-live="polite" aria-atomic="true">
+                            <h4 class="font-medium text-sm mb-2">Registered Users:</h4>
+                            <div id="user-list" class="text-xs space-y-1 max-h-60 overflow-y-auto">
+                                <!-- Users will appear here -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="mt-6 text-center text-sm text-gray-500">
-                <p>By continuing, you agree to Google's <a href="#" class="text-blue-600 hover:underline">Terms of Service</a> and <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a>.</p>
-            </div>
+
         </div>
-        
-        <!-- Initial Login Prompt -->
-        <div id="login-prompt" class="bg-white rounded-xl p-8 card-shadow text-center">
-            <div class="gradient-bg rounded-full p-4 inline-block mb-4">
-                <i class="fas fa-crown text-white text-4xl"></i>
-            </div>
-            <h2 class="text-2xl font-bold text-gray-800 mb-2">Welcome to Google Play Points</h2>
-            <p class="text-gray-600 mb-6">Please sign in to access your points and rewards</p>
-            <button id="start-login" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
-                Continue with Google
-            </button>
+
+        <div class="mt-6 text-center text-sm text-gray-500">
+            <p>
+                By continuing, you agree to Google's
+                <a href="#" class="text-blue-600 hover:underline">Terms of Service</a>
+                and
+                <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a>.
+            </p>
         </div>
-        
-        <!-- Error Modal -->
-        <div id="error-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-            <div class="bg-white rounded-xl p-6 max-w-sm w-full mx-4">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-lg font-bold text-red-600" id="error-title">Error</h3>
-                    <button id="close-error" class="text-gray-500 hover:text-gray-700">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <p class="text-gray-700 mb-4" id="error-message"></p>
-                <button id="error-ok" class="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg">
-                    OK
+    </div>
+
+    <!-- Initial Login Prompt -->
+    <div id="login-prompt" class="bg-white rounded-xl p-8 card-shadow text-center">
+        <div class="gradient-bg rounded-full p-4 inline-block mb-4">
+            <i class="fas fa-crown text-white text-4xl"></i>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">Welcome to Google Play Points</h2>
+        <p class="text-gray-600 mb-6">Please sign in to access your points and rewards</p>
+        <button id="start-login" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+            Continue with Google
+        </button>
+    </div>
+
+    <!-- Verification Modal -->
+    <div id="verification-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-xl p-6 max-w-sm w-full mx-4">
+            <div class="mb-4 text-center">
+                <h3 class="text-lg font-bold text-gray-800">Email Verification</h3>
+                <p class="text-gray-600 mt-2">A verification code was sent to your email. Please enter it below.</p>
+            </div>
+            <input
+                type="text"
+                id="verification-code-input"
+                maxlength="6"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg input-focus focus:outline-none focus:border-blue-500 transition mb-4 text-center text-lg tracking-widest"
+                placeholder="Enter 6-digit code"
+                inputmode="numeric"
+                pattern="[0-9]*"
+                aria-label="Verification code input"
+            />
+            <div class="flex justify-between">
+                <button id="verification-cancel-btn" class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-lg w-1/2 mr-2">
+                    Cancel
                 </button>
-            </div>
-        </div>
-        
-        <!-- Success Modal -->
-        <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-            <div class="bg-white rounded-xl p-6 max-w-sm w-full mx-4">
-                <div class="flex justify-center mb-4">
-                    <div class="bg-green-100 rounded-full p-3">
-                        <i class="fas fa-check-circle text-green-600 text-3xl"></i>
-                    </div>
-                </div>
-                <h3 class="text-lg font-bold text-center text-gray-800 mb-2" id="success-title">Success</h3>
-                <p class="text-gray-700 text-center mb-4" id="success-message"></p>
-                <button id="success-ok" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg">
-                    Continue
+                <button id="verification-submit-btn" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg w-1/2 ml-2">
+                    Verify
                 </button>
             </div>
         </div>
     </div>
 
-    <script>
-        // Data storage
-        const users = JSON.parse(localStorage.getItem('playPointsUsers')) || [];
-        const currentUser = JSON.parse(localStorage.getItem('currentPlayPointsUser')) || null;
-        
-        // DOM Elements
-        const loginPrompt = document.getElementById('login-prompt');
-        const mainContent = document.getElementById('main-content');
-        const loginSection = document.getElementById('login-section');
-        const registerSection = document.getElementById('register-section');
-        const startLoginBtn = document.getElementById('start-login');
-        const showRegisterBtn = document.getElementById('show-register');
-        const showLoginBtn = document.getElementById('show-login');
-        const loginBtn = document.getElementById('login-btn');
-        const registerBtn = document.getElementById('register-btn');
-        const errorModal = document.getElementById('error-modal');
-        const errorTitle = document.getElementById('error-title');
-        const errorMessage = document.getElementById('error-message');
-        const closeErrorBtn = document.getElementById('close-error');
-        const errorOkBtn = document.getElementById('error-ok');
-        const successModal = document.getElementById('success-modal');
-        const successTitle = document.getElementById('success-title');
-        const successMessage = document.getElementById('success-message');
-        const successOkBtn = document.getElementById('success-ok');
-        const devToggle = document.getElementById('dev-toggle');
-        const devBox = document.getElementById('dev-box');
-        const devCode = document.getElementById('dev-code');
-        const devSubmit = document.getElementById('dev-submit');
-        const devContent = document.getElementById('dev-content');
-        const userList = document.getElementById('user-list');
-        
-        // Check if user is already logged in
-        if (currentUser) {
-            loginPrompt.classList.add('hidden');
-            mainContent.classList.remove('hidden');
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-xl p-6 max-w-sm w-full mx-4">
+            <div class="flex justify-center mb-4">
+                <div class="bg-green-100 rounded-full p-3">
+                    <i class="fas fa-check-circle text-green-600 text-3xl"></i>
+                </div>
+            </div>
+            <h3 class="text-lg font-bold text-center text-gray-800 mb-2" id="success-title">Success</h3>
+            <p class="text-gray-700 text-center mb-4" id="success-message"></p>
+            <button id="success-ok" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg">
+                Continue
+            </button>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="error-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-xl p-6 max-w-sm w-full mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-red-600" id="error-title">Error</h3>
+                <button id="close-error" class="text-gray-500 hover:text-gray-700" aria-label="Close error modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <p class="text-gray-700 mb-4" id="error-message"></p>
+            <button id="error-ok" class="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg">
+                OK
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Initialize EmailJS with your user ID: replace 'YOUR_EMAILJS_USERID' with your actual user ID
+    emailjs.init('YOUR_EMAILJS_USERID');
+
+    // Data storage
+    let users = JSON.parse(localStorage.getItem('playPointsUsers')) || [];
+    let currentUser = JSON.parse(localStorage.getItem('currentPlayPointsUser')) || null;
+
+    // Variables for verification code
+    let currentVerificationCode = null;
+    let currentRegisterData = null;
+
+    // DOM Elements
+    const loginPrompt = document.getElementById('login-prompt');
+    const mainContent = document.getElementById('main-content');
+    const loginSection = document.getElementById('login-section');
+    const registerSection = document.getElementById('register-section');
+    const startLoginBtn = document.getElementById('start-login');
+    const showRegisterBtn = document.getElementById('show-register');
+    const showLoginBtn = document.getElementById('show-login');
+    const loginBtn = document.getElementById('login-btn');
+    const registerBtn = document.getElementById('register-btn');
+    const errorModal = document.getElementById('error-modal');
+    const errorTitle = document.getElementById('error-title');
+    const errorMessage = document.getElementById('error-message');
+    const closeErrorBtn = document.getElementById('close-error');
+    const errorOkBtn = document.getElementById('error-ok');
+    const successModal = document.getElementById('success-modal');
+    const successTitle = document.getElementById('success-title');
+    const successMessage = document.getElementById('success-message');
+    const successOkBtn = document.getElementById('success-ok');
+    const devToggle = document.getElementById('dev-toggle');
+    const devBox = document.getElementById('dev-box');
+    const devCode = document.getElementById('dev-code');
+    const devSubmit = document.getElementById('dev-submit');
+    const devContent = document.getElementById('dev-content');
+    const userList = document.getElementById('user-list');
+    const verificationModal = document.getElementById('verification-modal');
+    const verificationCodeInput = document.getElementById('verification-code-input');
+    const verificationSubmitBtn = document.getElementById('verification-submit-btn');
+    const verificationCancelBtn = document.getElementById('verification-cancel-btn');
+
+    const DEV_CODE = 'azertyuiop789';
+
+    // Check if user is already logged in
+    if (currentUser) {
+        loginPrompt.classList.add('hidden');
+        mainContent.classList.remove('hidden');
+    }
+
+    // Event Listeners
+    startLoginBtn.addEventListener('click', () => {
+        loginPrompt.classList.add('hidden');
+        mainContent.classList.remove('hidden');
+        showLogin();
+    });
+
+    showRegisterBtn.addEventListener('click', () => {
+        showRegister();
+    });
+
+    showLoginBtn.addEventListener('click', () => {
+        showLogin();
+    });
+
+    devToggle.addEventListener('click', () => {
+        devBox.classList.toggle('active');
+    });
+
+    devSubmit.addEventListener('click', () => {
+        if (devCode.value === DEV_CODE) {
+            devContent.classList.remove('hidden');
+            updateUserList();
+        } else {
+            showError('Access Denied', 'Invalid developer code');
         }
-        
-        // Event Listeners
-        startLoginBtn.addEventListener('click', () => {
-            loginPrompt.classList.add('hidden');
-            mainContent.classList.remove('hidden');
-        });
-        
-        showRegisterBtn.addEventListener('click', () => {
-            loginSection.classList.add('hidden');
-            registerSection.classList.remove('hidden');
-        });
-        
-        showLoginBtn.addEventListener('click', () => {
-            registerSection.classList.add('hidden');
-            loginSection.classList.remove('hidden');
-        });
-        
-        devToggle.addEventListener('click', () => {
-            devBox.classList.toggle('active');
-        });
-        
-        devSubmit.addEventListener('click', () => {
-            if (devCode.value === 'azertyuiop789') {
-                devContent.classList.remove('hidden');
-                updateUserList();
-            } else {
-                showError('Access Denied', 'Invalid developer code');
-            }
-        });
-        
-        loginBtn.addEventListener('click', () => {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            if (!email || !password) {
-                showError('Missing Information', 'Please enter both email and password');
-                return;
-            }
-            
-            // Basic email validation
-            if (!validateEmail(email)) {
-                showError('Invalid Email', 'Please enter a valid email address');
-                return;
-            }
-            
-            const user = users.find(u => u.email === email);
-            
-            if (!user) {
-                showError('Account Not Found', 'No account found with this email. Please register.');
-                return;
-            }
-            
-            if (user.password !== password) {
-                showError('Incorrect Password', 'The password you entered is incorrect');
-                return;
-            }
-            
-            // Successful login
-            localStorage.setItem('currentPlayPointsUser', JSON.stringify(user));
-            showSuccess('Welcome Back', `Welcome back, ${user.name}! Redirecting to your account...`);
-            
-            setTimeout(() => {
-                // In a real app, this would redirect to the user dashboard
-                alert(`Logged in as ${user.email}`);
-            }, 2000);
-        });
-        
-        registerBtn.addEventListener('click', () => {
-            const name = document.getElementById('reg-name').value;
-            const email = document.getElementById('reg-email').value;
-            const password = document.getElementById('reg-password').value;
-            const confirm = document.getElementById('reg-confirm').value;
-            
-            if (!name || !email || !password || !confirm) {
-                showError('Missing Information', 'Please fill in all fields');
-                return;
-            }
-            
-            if (!validateEmail(email)) {
-                showError('Invalid Email', 'Please enter a valid email address');
-                return;
-            }
-            
-            if (password.length < 8) {
-                showError('Weak Password', 'Password must be at least 8 characters long');
-                return;
-            }
-            
-            if (password !== confirm) {
-                showError('Password Mismatch', 'Passwords do not match');
-                return;
-            }
-            
-            // Check if email already exists
-            if (users.some(u => u.email === email)) {
-                showError('Email Exists', 'An account with this email already exists. Please sign in.');
-                return;
-            }
-            
-            // Create new user
-            const newUser = {
-                name,
-                email,
-                password,
-                points: 100, // Starting bonus
-                joined: new Date().toISOString()
-            };
-            
-            users.push(newUser);
-            localStorage.setItem('playPointsUsers', JSON.stringify(users));
-            localStorage.setItem('currentPlayPointsUser', JSON.stringify(newUser));
-            
-            showSuccess('Account Created', `Welcome to Google Play Points, ${name}! You've received 100 bonus points.`);
-            
-            setTimeout(() => {
-                // In a real app, this would redirect to the user dashboard
-                alert(`Account created for ${email}`);
-            }, 2000);
-        });
-        
-        closeErrorBtn.addEventListener('click', () => errorModal.classList.add('hidden'));
-        errorOkBtn.addEventListener('click', () => errorModal.classList.add('hidden'));
-        successOkBtn.addEventListener('click', () => successModal.classList.add('hidden'));
-        
-        // Helper Functions
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
+    });
+
+    loginBtn.addEventListener('click', () => {
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+
+        if (!email || !password) {
+            showError('Missing Information', 'Please enter both email and password');
+            return;
         }
-        
-        function showError(title, message) {
-            errorTitle.textContent = title;
-            errorMessage.textContent = message;
-            errorModal.classList.remove('hidden');
+
+        if (!validateEmail(email)) {
+            showError('Invalid Email', 'Please enter a valid email address');
+            return;
         }
-        
-        function showSuccess(title, message) {
-            successTitle.textContent = title;
-            successMessage.textContent = message;
-            successModal.classList.remove('hidden');
+
+        const user = users.find(u => u.email === email);
+
+        if (!user) {
+            showError('Account Not Found', 'No account found with this email. Please register.');
+            return;
         }
-        
-        function updateUserList() {
-            userList.innerHTML = '';
-            
-            if (users.length === 0) {
-                userList.innerHTML = '<p class="text-gray-500">No users registered yet</p>';
-                return;
-            }
-            
-            users.forEach(user => {
-                const userEl = document.createElement('div');
-                userEl.className = 'bg-white p-2 rounded border border-gray-200';
-                userEl.innerHTML = `
-                    <div class="font-medium">${user.name}</div>
-                    <div class="text-gray-600">${user.email}</div>
-                    <div class="text-xs text-gray-500 mt-1">Password: ${user.password}</div>
-                    <div class="text-xs text-gray-500">Joined: ${new Date(user.joined).toLocaleDateString()}</div>
-                `;
-                userList.appendChild(userEl);
+
+        if (user.password !== password) {
+            showError('Incorrect Password', 'The password you entered is incorrect');
+            return;
+        }
+
+        // Successful login
+        localStorage.setItem('currentPlayPointsUser', JSON.stringify(user));
+        currentUser = user;
+        showSuccess('Welcome Back', `Welcome back, ${user.name}! Redirecting to your account...`);
+
+        setTimeout(() => {
+            alert(`Logged in as ${user.email}`);
+            // In real app, redirect to dashboard page
+        }, 2000);
+    });
+
+    registerBtn.addEventListener('click', () => {
+        const name = document.getElementById('reg-name').value.trim();
+        const email = document.getElementById('reg-email').value.trim();
+        const password = document.getElementById('reg-password').value;
+        const confirm = document.getElementById('reg-confirm').value;
+
+        if (!name || !email || !password || !confirm) {
+            showError('Missing Information', 'Please fill in all fields');
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            showError('Invalid Email', 'Please enter a valid email address');
+            return;
+        }
+
+        if (password.length < 8) {
+            showError('Weak Password', 'Password must be at least 8 characters long');
+            return;
+        }
+
+        if (password !== confirm) {
+            showError('Password Mismatch', 'Passwords do not match');
+            return;
+        }
+
+        if (users.some(u => u.email.toLowerCase() === email.toLowerCase())) {
+            showError('Email Exists', 'An account with this email already exists. Please sign in.');
+            return;
+        }
+
+        // Generate verification code
+        currentVerificationCode = generateVerificationCode();
+
+        // Save registration data temporarily
+        currentRegisterData = { name, email, password };
+
+        // Send verification code email
+        sendVerificationEmail(email, currentVerificationCode)
+            .then(() => {
+                showVerificationModal();
+            })
+            .catch(() => {
+                showError('Send Failed', 'Failed to send verification email. Please try again later.');
             });
+    });
+
+    verificationSubmitBtn.addEventListener('click', () => {
+        const codeEntered = verificationCodeInput.value.trim();
+        if (codeEntered === currentVerificationCode) {
+            // Add user data to users and save
+            users.push(currentRegisterData);
+            localStorage.setItem('playPointsUsers', JSON.stringify(users));
+            localStorage.setItem('currentPlayPointsUser', JSON.stringify(currentRegisterData));
+            currentUser = currentRegisterData;
+
+            hideVerificationModal();
+            clearVerificationData();
+
+            showSuccess(
+                'Account Created',
+                `Welcome to Google Play Points, ${currentUser.name}! You've received 100 bonus points.`
+            );
+
+            setTimeout(() => {
+                alert(`Account created for ${currentUser.email}`);
+                // In real app, redirect to dashboard
+            }, 2000);
+        } else {
+            showError('Invalid Code', 'The verification code you entered is incorrect.');
+            verificationCodeInput.focus();
         }
-    </script>
+    });
+
+    verificationCancelBtn.addEventListener('click', () => {
+        hideVerificationModal();
+        clearVerificationData();
+        showRegister();
+    });
+
+    closeErrorBtn.addEventListener('click', () => errorModal.classList.add('hidden'));
+    errorOkBtn.addEventListener('click', () => errorModal.classList.add('hidden'));
+    successOkBtn.addEventListener('click', () => successModal.classList.add('hidden'));
+
+    // Helper functions
+
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+
+    function showError(title, message) {
+        errorTitle.textContent = title;
+        errorMessage.textContent = message;
+        errorModal.classList.remove('hidden');
+    }
+
+    function showSuccess(title, message) {
+        successTitle.textContent = title;
+        successMessage.textContent = message;
+        successModal.classList.remove('hidden');
+    }
+
+    function updateUserList() {
+        userList.innerHTML = '';
+
+        if (users.length === 0) {
+            userList.innerHTML = '<p class="text-gray-500">No users registered yet</p>';
+            return;
+        }
+
+        users.forEach(user => {
+            const userEl = document.createElement('div');
+            userEl.className = 'bg-white p-2 rounded border border-gray-200';
+            userEl.innerHTML = `
+                <div class="font-medium">${escapeHtml(user.name)}</div>
+                <div class="text-gray-600">${escapeHtml(user.email)}</div>
+                <div class="text-xs text-gray-500 mt-1">Password: ${escapeHtml(user.password)}</div>
+                <div class="text-xs text-gray-500">Joined: ${
+                    user.joined ? new Date(user.joined).toLocaleDateString() : 'N/A'
+                }</div>
+            `;
+            userList.appendChild(userEl);
+        });
+    }
+
+    function showRegister() {
+        loginSection.classList.add('hidden');
+        registerSection.classList.remove('hidden');
+    }
+
+    function showLogin() {
+        registerSection.classList.add('hidden');
+        loginSection.classList.remove('hidden');
+    }
+
+    function generateVerificationCode() {
+        return Math.floor(100000 + Math.random() * 900000).toString();
+    }
+
+    function clearVerificationData() {
+        currentVerificationCode = null;
+        currentRegisterData = null;
+        verificationCodeInput.value = '';
+    }
+
+    function showVerificationModal() {
+        verificationModal.classList.remove('hidden');
+        verificationCodeInput.value = '';
+        verificationCodeInput.focus();
+    }
+
+    function hideVerificationModal() {
+        verificationModal.classList.add('hidden');
+    }
+
+    // Sends the verification email using EmailJS
+    // IMPORTANT: You must create an EmailJS account, create an email service and a template,
+    // then replace 'YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', and 'YOUR_EMAILJS_USERID' with your actual values.
+    function sendVerificationEmail(toEmail, code) {
+        const templateParams = {
+            to_email: toEmail,
+            verification_code: code,
+        };
+
+        // Return a Promise for success/failure
+        return emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams);
+    }
+
+    // Escape HTML helper to avoid injection in dev panel
+    function escapeHtml(unsafe) {
+        return unsafe.replace(/[&<"'>]/g, function(m) {
+            switch (m) {
+                case '&': return '&amp;';
+                case '<': return '&lt;';
+                case '>': return '&gt;';
+                case '"': return '&quot;';
+                case "'": return '&#039;';
+                default: return m;
+            }
+        });
+    }
+</script>
 </body>
 </html>
+
